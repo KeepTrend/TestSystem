@@ -140,7 +140,7 @@ function display_tests_real(){
 								main_str += '<td>' + res[i].test_numberA + '</td>';
 								main_str += '<td>' + res[i].test_numberB + '</td>';
 								main_str += '<td>' + res[i].group_name + '</td>';
-								main_str += '<td><button data-test="' + res[i].test_name + '" data-number1="' + res[i].test_numberA + '" data-number2="' + res[i].test_numberB + '" data-categories="' + res[i].categories + '" data-duration="' + res[i].test_duration + '" class="btn btn-info btn_start">Start</button></td>';
+								main_str += '<td><button data-test="' + res[i].test_name + '" data-number1="' + res[i].test_numberA + '" data-number2="' + res[i].test_numberB + '" data-categories="' + res[i].categories + '" data-duration="' + res[i].test_duration + '" data-from="' + res[i].test_available_from + '" data-to="' + res[i].test_available_to + '" class="btn btn-info btn_start">Start</button></td>';
 								main_str += '</tr>';
 			        		}
 			        	}
@@ -156,6 +156,14 @@ function display_tests_real(){
 					button_func();
 
 					$("button.btn_start").click(function(){
+						console.log(new Date($(this).data('from')));
+						console.log(new Date($(this).data('to')));
+						console.log(new Date());
+						if(new Date($(this).data('from')) < new Date() && new Date($(this).data('from')) > new Date()){
+							alert("you can not access this test now!");
+							return;
+						}
+						
 						onProgress = 1;
 						test = $(this).data('test');
 						var number_A = $(this).data('number1');
